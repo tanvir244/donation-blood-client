@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const Main = () => {
     return (
-        <div>
+        <div className="font-merienda">
             <Outlet></Outlet>
         </div>
     );

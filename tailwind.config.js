@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poetsen: '"Poetsen One", sans-serif',
+        merienda: '"Merienda", cursive'
+      }
+    },
   },
   plugins: [
     require('daisyui'),

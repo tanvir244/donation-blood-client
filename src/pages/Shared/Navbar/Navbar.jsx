@@ -22,7 +22,7 @@ const Navbar = () => {
                     </div>
                     <Link to='/' className="flex items-center gap-4">
                         <img className="w-16 h-16 rounded-full" src={logo} alt="" />
-                        <h3 className="text-2xl md:text-3xl text-red-600 font-bold">Blood Chain</h3>
+                        <h3 className="text-2xl md:text-4xl text-red-600 font-poetsen">Blood Chain</h3>
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
