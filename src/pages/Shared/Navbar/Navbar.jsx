@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import logo from "../../../assets/image/logo.png";
 
 const Navbar = () => {
     const navLinks = <>
@@ -8,7 +9,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="bg-[#f8edeb] py-4">
+        <div className="bg-[#f8edeb] py-2">
             <div className="max-w-6xl mx-auto navbar">
             <div className="navbar-start">
                 <div className="dropdown">
@@ -19,7 +20,10 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <Link to='/' className="text-3xl text-red-600 font-bold">Blood Chain</Link>
+                <Link to='/' className="flex items-center gap-4">
+                    <img className="w-16 h-16 rounded-full" src={logo} alt="" />
+                    <h3 className="text-2xl md:text-3xl text-red-600 font-bold">Blood Chain</h3>
+                    </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
