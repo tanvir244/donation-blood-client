@@ -1,12 +1,28 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/image/logo.png";
+import useAuth from "../../../hooks/useAuth";
+
+// react toastify 
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
+
     const navLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/dadafa'>Donation requests</NavLink></li>
         <li><NavLink to='/dasjak'>Blogs</NavLink></li>
     </>
+
+    // logout 
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                toast.warning('User Logged out');
+            })
+            .catch()
+    }
 
     return (
         <div className="bg-[#f8edeb] py-2">
@@ -30,18 +46,25 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
+
                 <div className="navbar-end">
-                    <div className="dropdown dropdown-end z-50">
+                    {user ? <div className="dropdown dropdown-end z-50">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <div className="rounded-full">
+                                <img className="" alt="Tailwind CSS Navbar component" src={user?.photoURL || "https://i.ibb.co/TmsrwQs/user.png"} />
                             </div>
                         </div>
                         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                             <li><a>Dashboard</a></li>
-                            <li><a>Logout</a></li>
+                            <li onClick={handleLogout}><a>Logout</a></li>
                         </ul>
                     </div>
+                        :
+                        <div className="flex gap-2">
+                            <Link to="/login"><button className="btn-sm bg-[#2b3440] md:bg-[#2b3440] md:btn text-white md:text-white md:px-8">Login</button></Link>
+                            <Link to="/sign_up"><button className="btn-sm bg-[#2b3440] md:bg-[#2b3440] md:btn text-white md:text-white md:px-8">Register</button></Link>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
