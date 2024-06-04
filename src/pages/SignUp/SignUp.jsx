@@ -3,6 +3,12 @@ import Navbar from "../Shared/Navbar/Navbar";
 
 // react hook form
 import { useForm } from "react-hook-form"
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import axios from "axios";
+
+console.log(import.meta.env.VITE_Image_Hosting_Key);
+const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SignUp = () => {
     // showing Districts
@@ -13,6 +19,21 @@ const SignUp = () => {
     const [allUpazilas, setAllUpazilas] = useState([]);
     const [selectedDistrict, setSelectedDistrict] = useState([]);
     const [expectedUpazilas, setExpectedUpazilas] = useState([]);
+
+    //  sign up form 
+    const { register, handleSubmit } = useForm();
+    // const axiosPublic = useAxiosPublic();
+
+    const onSubmit = async (data) => {
+        console.log(data);
+        // image upload to imgbb and then get an url 
+        // const imageFile = {profile: data.profile[0]}
+        const formData = new FormData();
+        formData.append('image', data.profile[0])
+        const res = await axios.post(image_hosting_api, formData);
+        console.log(res.data);
+        console.log(res?.data?.data?.display_url);
+    };
 
     // showing Districts based on Division
     useEffect(() => {
@@ -55,12 +76,6 @@ const SignUp = () => {
     }, [allUpazilas, selectedDistrict])
 
 
-    // sign up form 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = (data) => {
-        console.log(data)
-    };
-
     console.log(expectedUpazilas);
 
     // const handleSignUp = event => {
@@ -94,44 +109,35 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text text-white font-bold text-base">Name</span>
                                     </label>
-                                    <input type="text" placeholder="Your name" className="input input-bordered" {...register('name')} />
+                                    <input type="text" placeholder="Your name" className="input input-bordered" {...register('name', {required: true})} />
                                 </div>
                                 <div className="form-control w-1/2">
                                     <label className="label">
                                         <span className="label-text text-white font-bold text-base">Email</span>
                                     </label>
-                                    <input type="email" placeholder="email" className="input input-bordered" {...register('email')} />
+                                    <input type="email" placeholder="email" className="input input-bordered" {...register('email', {required: true})} />
                                 </div>
                             </div>
                             <div className="flex justify-between gap-4">
                                 <div className="form-control w-1/2">
                                     <label className="mb-2 font-bold text-base text-white" htmlFor="division">Division</label>
                                     <select
-                                        {...register('division')}
+                                        {...register('division', {required: true})}
                                         value={selectedDivision}
                                         onChange={handleDivisionChange}
                                         id="division"
                                         className="p-2 rounded-lg"
                                     >
-                                        <option value="Dhaka">Dhaka</option>
-                                        <option value="Mymensingh">Mymensingh</option>
-                                        <option value="Chattogram">Chattogram</option>
-                                        <option value="Rajshahi">Rajshahi</option>
-                                        <option value="Khulna">Khulna</option>
-                                        <option value="Barishal">Barishal</option>
-                                        <option value="Rangpur">Rangpur</option>
-                                        <option value="Sylhet">Sylhet</option>
-                                        {/* Uncomment and use this if you have a dynamic list */}
-                                        {/* {allDivision.map((item, index) => (
-            <option key={index} value={item.name}>{item.name}</option>
-        ))} */}
+                                        {allDivision.map((item, index) => (
+                                            <option key={index} value={item.name}>{item.name}</option>
+                                        ))}
                                     </select>
                                     <p className="mt-2 text-white">Selected Division: {selectedDivision}</p>
                                 </div>
                                 <div className="form-control w-1/2">
                                     <label className="mb-2 font-bold text-base text-white" htmlFor="district">District</label>
                                     <select
-                                        {...register('district')}
+                                        {...register('district', {required: true})}
                                         onChange={handleDistrictChange}
                                         id="district"
                                         className="p-2 rounded-lg">
@@ -146,8 +152,8 @@ const SignUp = () => {
                                 <div className="form-control w-1/2">
                                     <label className="mb-2 font-bold text-base text-white" htmlFor="upazila">Upazila</label>
                                     <select
-                                        
-                                        {...register('upazila')}
+
+                                        {...register('upazila', {required: true})}
                                         id="upazila"
                                         className="p-2 rounded-lg">
                                         <option value="" disabled>Select district than upazila</option>
@@ -159,7 +165,7 @@ const SignUp = () => {
                                 <div className="form-control w-1/2">
                                     <label className="mb-2 font-bold text-base text-white" htmlFor="district">Blood Group</label>
                                     <select
-                                        {...register('blood')}
+                                        {...register('blood', {required: true})}
                                         id="district"
                                         className="p-2 rounded-lg">
                                         <option value="" disabled>select blood group</option>
@@ -179,18 +185,18 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text text-white font-bold text-base">Password</span>
                                     </label>
-                                    <input type="password" placeholder="password" className="input input-bordered" {...register('password')} />
+                                    <input type="password" placeholder="password" className="input input-bordered" {...register('password', {required: true})} />
                                 </div>
                                 <div className="form-control w-1/2">
                                     <label className="label">
                                         <span className="label-text text-white font-bold text-base">Confirm Password</span>
                                     </label>
-                                    <input type="password" placeholder="confirm password" className="input input-bordered" {...register('confirm_password')} />
+                                    <input type="password" placeholder="confirm password" className="input input-bordered" {...register('confirm_password', {required: true})} />
                                 </div>
                             </div>
                             <div className="form-control">
                                 <label className="mb-2 font-bold text-base text-white" htmlFor="">Your Profile</label>
-                                <input type="file" className="file-input w-full max-w-xs" {...register('profile')} />
+                                <input type="file" className="file-input w-full max-w-xs" {...register('profile', {required: true})} />
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-white font-bold">Sign Up</button>
