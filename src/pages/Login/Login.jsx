@@ -8,7 +8,7 @@ const Login = () => {
             <div className="flex flex-col md:flex-row justify-between my-14 w-[94%] lg:max-w-6xl mx-auto">
                 <img className="w-full md:w-1/2" src="https://i.ibb.co/r48DJMB/humans-1.png" alt="" />
                 <div className="w-full md:w-1/2">
-                    <h2 className="mb-8 text-center text-5xl text-[#ff0000] font-bold">Please Login</h2>
+                    <h2 className="mb-8 text-center text-5xl text-[#ff0000] font-bold font-poetsen">Please Login</h2>
                     <div className="card shrink-0 w-full lg:w-[80%] mx-auto shadow-2xl bg-[#ff4800]">
                         <form className="card-body">
                             <div className="form-control">
