@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import CreateRequest from "../pages/Dashboard/CreateRequest";
+import PendingDonationRequests from "../pages/PendingDonationRequests/PendingDonationRequests";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         {
           path: '/sign_up',
           element: <SignUp></SignUp>
+        },
+        {
+          path: '/donation_requests',
+          element: <PendingDonationRequests></PendingDonationRequests>
         }
       ]
     },
