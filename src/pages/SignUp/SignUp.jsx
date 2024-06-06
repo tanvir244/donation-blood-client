@@ -118,9 +118,10 @@ const SignUp = () => {
 
     // showing Districts based on Division
     useEffect(() => {
-        fetch('DivisionToDistrict.json')
+        fetch('/DivisionToDistrict.json')
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setAllDivision(data[0].divisions);
             });
     }, []);
@@ -139,7 +140,7 @@ const SignUp = () => {
 
     // showing Upazilas based on dristic
     useEffect(() => {
-        fetch('DistrictsToUpazila.json')
+        fetch('/DistrictsToUpazila.json')
             .then(res => res.json())
             .then(data => setAllUpazilas(data))
     }, [])
@@ -156,7 +157,7 @@ const SignUp = () => {
 
     }, [allUpazilas, selectedDistrict])
 
-    // console.log(expectedUpazilas);
+    // console.log(allDivision);
 
     return (
         <div>
