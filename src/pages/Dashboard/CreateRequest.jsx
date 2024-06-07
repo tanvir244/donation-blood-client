@@ -84,7 +84,7 @@ const CreateRequest = () => {
     return (
         <div className="mx-auto my-12">
             <h2 className="mb-8 text-center text-4xl text-[#ff0000] font-bold font-poetsen">Create Donation Request</h2>
-            <div className="card shrink-0 w-[70%] mx-auto shadow-2xl bg-[#ffd3cb]">
+            <div className="card shrink-0 w-[92%] lg:w-[70%] mx-auto shadow-2xl bg-[#ffd3cb]">
                 <form className="card-body space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex flex-col md:flex-row justify-between gap-4">
                         <div className="form-control w-full md:w-1/2">
@@ -206,7 +206,7 @@ const CreateRequest = () => {
                         <label className="label">
                             <span className="label-text text-black font-bold text-base">Request Message</span>
                         </label>
-                        <textarea {...register('request_message', { required: true })} id="" cols="30" rows="10" placeholder="Write a request message" className="p-4"></textarea>
+                        <textarea {...register('request_message', { required: true })} id="" cols="30" rows="10" placeholder="Write a request message" className="p-4 rounded-lg"></textarea>
                         {errors.request_message && <span className="text-red-600">Request message is required</span>}
                     </div>
                     <div className="form-control mt-6">

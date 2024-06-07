@@ -8,6 +8,7 @@ import CreateRequest from "../pages/Dashboard/CreateRequest";
 import PendingDonationRequests from "../pages/PendingDonationRequests/PendingDonationRequests";
 import RequestViewDetails from "../pages/RequestViewDetails/RequestViewDetails";
 import { axiosSecure } from "../hooks/useAxiosSecure";
+import Profile from "../pages/Dashboard/Profile";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/create_request',
           element: <CreateRequest></CreateRequest> 
+        },
+        {
+          path: '/dashboard/profile',
+          element: <Profile></Profile>
         }
       ]
     }
