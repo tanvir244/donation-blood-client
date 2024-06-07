@@ -46,7 +46,7 @@ const PendingDonationRequests = () => {
                                     <td>{request.donation_date}</td>
                                     <td>{request.donation_time}</td>
                                     <td><span className="bg-[#F8C3B9] text-red-700 py-2 px-4 rounded-2xl font-bold">{request.donation_status}</span></td>
-                                    <td><Link to="/request_details"><button className="btn bg-green-600 text-white">View Details</button></Link></td>
+                                    <td><Link to={`/requests_details/${request._id}`}><button className="btn bg-green-600 text-white">View Details</button></Link></td>
                                 </tr>)
                             }
                         </tbody>

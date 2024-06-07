@@ -6,6 +6,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import CreateRequest from "../pages/Dashboard/CreateRequest";
 import PendingDonationRequests from "../pages/PendingDonationRequests/PendingDonationRequests";
+import RequestViewDetails from "../pages/RequestViewDetails/RequestViewDetails";
+import { axiosSecure } from "../hooks/useAxiosSecure";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,11 @@ const router = createBrowserRouter([
         {
           path: '/donation_requests',
           element: <PendingDonationRequests></PendingDonationRequests>
+        },
+        {
+          path: '/requests_details/:id',
+          element: <RequestViewDetails></RequestViewDetails>,
+          loader: ({params}) => axiosSecure(`/requests_details/${params.id}`)
         }
       ]
     },
