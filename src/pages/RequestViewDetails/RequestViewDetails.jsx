@@ -18,52 +18,52 @@ const RequestViewDetails = () => {
         <div>
             <Navbar></Navbar>
             <h2 className="text-center text-5xl text-[#ff0000] font-bold font-poetsen mt-12">Request Details</h2>
-            <div className="w-[70%] mx-auto bg-[#ffd3cb] my-8 px-8 py-12 rounded-lg">
+            <div className="w-[92%] md:w-[85%] lg:w-[70%] mx-auto bg-[#ffd3cb] my-8 px-8 py-12 rounded-lg">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Requester Name :</h3>
                         <h3>{requester_name}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Requester Email :</h3>
                         <h3>{requester_email}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Recipient Name :</h3>
                         <h3>{recipient_name}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Division :</h3>
                         <h3>{division}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">District :</h3>
                         <h3>{district}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Upazila :</h3>
                         <h3>{upazila}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Blood Group :</h3>
                         <h3 className="text-[#ff0000] text-xl font-bold">{blood}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Donation Date :</h3>
                         <h3>{donation_date}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Donation Time :</h3>
                         <h3>{donation_time}</h3>
                     </div>
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Donation Status :</h3>
                         <h3>{donation_status}</h3>
                     </div>
                 </div>
 
                 <div className="space-y-4">
-                    <div className="bg-white py-4 px-6 rounded-lg flex gap-2">
+                    <div className="bg-white py-4 px-6 rounded-lg flex flex-col lg:flex-row gap-2">
                         <h3 className="text-black text-lg font-bold">Hospital Name :</h3>
                         <h3>{hospital_name}</h3>
                     </div>
