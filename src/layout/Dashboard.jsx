@@ -8,7 +8,7 @@ const Dashboard = () => {
         <div className='lg:flex lg:justify-between'>
             {/* Dashboard slide bar  */}
             <div className='w-full lg:w-[20%] lg:min-h-screen py-6 lg:py-0 lg:rounded-b-xl bg-[#ffd3cb] lg:fixed'>
-                <h2 className='text-3xl font-bold text-center lg:my-4'>Donor</h2>
+                <h2 className='text-3xl font-bold text-center mb-6 lg:my-4'>Donor</h2>
                 <ul className="menu font-semibold">
                     <li>
                         <NavLink to="/dashboard/donor_home">
