@@ -12,6 +12,7 @@ import Profile from "../pages/Dashboard/Profile";
 import DonorHomePage from "../pages/Dashboard/DonorHomePage";
 import UpdateRequest from "../pages/Dashboard/UpdateRequest";
 import MyDonationRequests from "../pages/Dashboard/MyDonationRequests";
+import AdminHomePage from "../pages/Dashboard/AdminHomePage";
 
 const router = createBrowserRouter([
     {
@@ -65,6 +66,9 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/my_donation_requests',
           element: <MyDonationRequests></MyDonationRequests>
+        },
+        {path: '/dashboard/admin_home_page',
+          element: <AdminHomePage></AdminHomePage>
         }
       ]
     }
