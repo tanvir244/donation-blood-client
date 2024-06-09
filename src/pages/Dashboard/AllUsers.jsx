@@ -16,7 +16,7 @@ const AllUsers = () => {
         axiosSecure.patch(`/update_status_by_admin/${id}`)
             .then(res => {
                 console.log(res.data);
-                if(res.data.modifiedCount > 0){
+                if (res.data.modifiedCount > 0) {
                     // refetch data
                     refetch();
                 }
@@ -24,39 +24,39 @@ const AllUsers = () => {
     }
     const handleActive = id => {
         axiosSecure.patch(`/update_status_by_admin_active/${id}`)
-        .then(res => {
-            console.log(res.data);
-            if(res.data.modifiedCount > 0){
-                // refetch data
-                refetch();
-            }
-        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    // refetch data
+                    refetch();
+                }
+            })
     }
 
     const handleVolanteer = id => {
-        axiosSecure.patch(`/make_status_volunteer/${id}`)
-        .then(res => {
-            console.log(res.data);
-            if(res.data.modifiedCount > 0){
-                // refetch data
-                refetch();
-            }
-        })
+        axiosSecure.patch(`/make_role_volunteer/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    // refetch data
+                    refetch();
+                }
+            })
     }
     const handleAdmin = id => {
-        axiosSecure.patch(`/make_status_admin/${id}`)
-        .then(res => {
-            console.log(res.data);
-            if(res.data.modifiedCount > 0){
-                // refetch data
-                refetch();
-            }
-        })
+        axiosSecure.patch(`/make_role_admin/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    // refetch data
+                    refetch();
+                }
+            })
     }
 
     return (
         <div className="my-12">
-            <h1 className="text-4xl text-green-700 font-bold text-center">My Donation Requests</h1>
+            <h1 className="text-4xl text-green-700 font-bold text-center">All Users</h1>
             {/* <div className="dropdown dropdown-bottom dropdown-end w-[90%] flex justify-end">
                 <div tabIndex={0} role="button" className="btn m-1 text-white bg-[#ff0000]">Select Status</div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-[#ff0000] text-white font-semibold rounded-box w-52">
@@ -77,16 +77,12 @@ const AllUsers = () => {
                                 <th>Profile</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Role</th>
                                 <th>Status</th>
                                 <th>Unblock</th>
                                 <th>Block</th>
+                                <th>Role</th>
                                 <th>Make Volunteer</th>
                                 <th>Make Admin</th>
-                                <th className="text-center">Status</th>
-                                <th>Details</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,30 +102,19 @@ const AllUsers = () => {
                                     </td>
                                     <td className="w-24">{request.name}</td>
                                     <td>{request.email}</td>
-                                    <td>{request.role}</td>
-                                    <td>{request.status}</td>
+                                    <td className="font-semibold text-black">{request.status}</td>
                                     <td>
                                         <button onClick={() => handleActive(request._id)} className="btn btn-sm bg-green-600 text-white" disabled={request.status === 'active'}>Unblock</button>
                                     </td>
                                     <td>
                                         <button onClick={() => handleBlock(request._id)} className="btn btn-sm bg-red-600 text-white" disabled={request.status === 'blocked'}>Block</button>
                                     </td>
+                                    <td className="font-semibold text-black">{request.role}</td>
                                     <td>
                                         <button onClick={() => handleVolanteer(request._id)} className="btn btn-sm bg-[#023047] text-white" disabled={request.role === 'volunteer'}>Volunteer</button>
                                     </td>
                                     <td>
                                         <button onClick={() => handleAdmin(request._id)} className="btn btn-sm bg-red-600 text-white" disabled={request.role === 'admin'}>Admin</button>
-                                    </td>
-                                    <td>
-                                        <Link to={`/requests_details/${request._id}`}><button className="btn bg-green-600 text-white w-28">View Details</button></Link>
-                                    </td>
-                                    <td>
-                                        <Link to={`/update_request/${request._id}`}><button className="btn bg-[#006ee9] text-white w-28">Edit</button></Link>
-                                    </td>
-                                    <td>
-                                        <button
-                                            // onClick={() => handleDelete(request._id)} 
-                                            className="btn bg-[#ff0000] text-white w-28">Delete</button>
                                     </td>
                                 </tr>)
                             }
