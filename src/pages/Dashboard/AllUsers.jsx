@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAllUsers from "../../hooks/useAllUsers";
 
@@ -57,16 +56,6 @@ const AllUsers = () => {
     return (
         <div className="my-12">
             <h1 className="text-4xl text-green-700 font-bold text-center">All Users</h1>
-            {/* <div className="dropdown dropdown-bottom dropdown-end w-[90%] flex justify-end">
-                <div tabIndex={0} role="button" className="btn m-1 text-white bg-[#ff0000]">Select Status</div>
-                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-[#ff0000] text-white font-semibold rounded-box w-52">
-                    <li onClick={() => sortStatus('all')}><a>All</a></li>
-                    <li onClick={() => sortStatus('pending')}><a>Pending</a></li>
-                    <li onClick={() => sortStatus('inprogress')}><a>Inprogress</a></li>
-                    <li onClick={() => sortStatus('done')}><a>Done</a></li>
-                    <li onClick={() => sortStatus('cancel')}><a>Canceled</a></li>
-                </ul>
-            </div> */}
             <div className="w-[90%] md:w-max-6xl mx-auto my-8">
                 <div className="overflow-x-auto">
                     <table className="table">
