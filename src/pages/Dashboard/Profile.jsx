@@ -177,8 +177,6 @@ const Profile = () => {
                             </select>
                             {errors.upazila && <span className="text-red-600">District is required</span>}
                         </div>
-
-
                         <div className="form-control w-full md:w-1/2">
                             <label className="mb-2 font-bold text-base text-black" htmlFor="blood">Blood Group</label>
                             <select
