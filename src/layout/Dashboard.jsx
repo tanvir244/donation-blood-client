@@ -33,6 +33,11 @@ const Dashboard = () => {
                         <span className='text-xl'><FaUser></FaUser></span>
                             Profile</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/all_users">
+                        <span className='text-xl'><FaUser></FaUser></span>
+                            All Users</NavLink>
+                    </li>
                 </ul>)}
 
                 {role === 'donor' && (<ul className="menu font-semibold">

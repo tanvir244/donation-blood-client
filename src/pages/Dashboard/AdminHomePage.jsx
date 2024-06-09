@@ -30,7 +30,7 @@ const AdminHomePage = () => {
             <div className="w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="py-12 px-8 bg-[#9dd9d2] text-center rounded-xl">
                     <div className="w-[65px] mx-auto text-6xl mb-3"><FaUsers /></div>
-                    <h1 className="text-4xl font-bold mb-2">Total Users</h1>
+                    <h1 className="text-4xl font-bold mb-2">Total Donors</h1>
                     <h1 className="text-4xl font-bold">{totalUser}</h1>
                 </div>
                 <div className="py-12 px-8 bg-[#ffd29d] text-center rounded-xl">
