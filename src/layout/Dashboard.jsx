@@ -11,9 +11,9 @@ const Dashboard = () => {
                 <h2 className='text-3xl font-bold text-center mb-6 lg:my-4'>Donor</h2>
                 <ul className="menu font-semibold">
                     <li>
-                        <NavLink to="/dashboard/donor_home">
+                        <NavLink to="/dashboard/donor_home_page">
                         <span className='text-xl'><FaHome></FaHome></span>
-                            Dashboard Home</NavLink>
+                            Dashboard Home Page</NavLink> 
                     </li>
                     <li>
                         <NavLink to="/dashboard/profile">

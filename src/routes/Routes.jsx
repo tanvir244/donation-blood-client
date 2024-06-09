@@ -9,6 +9,7 @@ import PendingDonationRequests from "../pages/PendingDonationRequests/PendingDon
 import RequestViewDetails from "../pages/RequestViewDetails/RequestViewDetails";
 import { axiosSecure } from "../hooks/useAxiosSecure";
 import Profile from "../pages/Dashboard/Profile";
+import DonorHomePage from "../pages/Dashboard/DonorHomePage";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/profile',
           element: <Profile></Profile>
+        },
+        {
+          path: '/dashboard/donor_home_page',
+          element: <DonorHomePage></DonorHomePage>
         }
       ]
     }

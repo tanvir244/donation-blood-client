@@ -29,20 +29,8 @@ const Profile = () => {
     // default upazila
     const [defaultUpazila, setDefaultUpazila] = useState([]);
 
-    // showing district
-    // const [districts, setDistricts] = useState([]);
-
-    // // showing Districts
-    // const [allDivision, setAllDivision] = useState([]);
-    // const [selectedDivision, setSelectedDivision] = useState("Dhaka");
-    // const [allDistricts, setAllDistricts] = useState([]);
-    // // showing Upazilas
-    // const [allUpazilas, setAllUpazilas] = useState([]);
-    // const [selectedDistrict, setSelectedDistrict] = useState([]);
-    // const [expectedUpazilas, setExpectedUpazilas] = useState([]);
-
+    // react hook form
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     const onSubmit = async (data) => {
         console.log(data);
 
@@ -77,21 +65,17 @@ const Profile = () => {
                 setDiviWithDistri(expectedObject.districts);
             })
     }, [defaultDivi])
-    // console.log(diviWithDistri);
 
     // fetching district names
     useEffect(() => {
         fetch('/DistrictsToUpazila.json')
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
                 const findDistricts = data.find(district => district.district === defaultDistri);
                 setDistiWithUpazila(findDistricts.upazilas);
-                // console.log(findDistricts);
             })
     }, [defaultDistri])
     console.log(distWithUpazila);
-    // console.log(defaultDistri);
 
     // fetching user data
     useEffect(() => {
@@ -101,14 +85,6 @@ const Profile = () => {
                 setDefaultDistri(res.data.district);
                 setDefaultUpazila(res.data.upazila);
                 setUserData(res.data);
-
-                // Set default values for the form fields
-                // setValue('name', res.data.name);
-                // setValue('email', res.data.email);
-                // setValue('division', res.data.division);
-                // setValue('district', res.data.district);
-                // setValue('upazila', res.data.upazila);
-                // setValue('blood', res.data.blood);
 
             })
     }, [axiosSecure, user.email]);
@@ -131,64 +107,6 @@ const Profile = () => {
         setDefaultUpazila(event.target.value);
         console.log(event.target.value);
     }
-
-    // useEffect(() => {
-    //     fetch('/DivisionToDistrict.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setAllDivision(data[0].divisions);
-    //         });
-    // }, []);
-
-    // useEffect(() => {
-    //     const selectedDivisionObj = allDivision.find(div => div.name === selectedDivision);
-    //     if (selectedDivisionObj) {
-    //         setAllDistricts(selectedDivisionObj.districts);
-    //     }
-    // }, [selectedDivision, allDivision]);
-
-    // const handleDivisionChange = (event) => {
-    //     setSelectedDivision(event.target.value);
-    // };
-
-    // useEffect(() => {
-    //     fetch('/DistrictsToUpazila.json')
-    //         .then(res => res.json())
-    //         .then(data => setAllUpazilas(data))
-    // }, [])
-
-    // const handleDistrictChange = (event) => {
-    //     setSelectedDistrict(event.target.value);
-    // };
-
-    // useEffect(() => {
-    //     const selectedDistrictsObj = allUpazilas.find(upazila => upazila.district === selectedDistrict);
-    //     if (selectedDistrictsObj) {
-    //         setExpectedUpazilas(selectedDistrictsObj.upazilas);
-    //     }
-    // }, [allUpazilas, selectedDistrict]);
-
-    // console.log(expectedUpazilas);
-    // const selectedDivisionValue = watch('division');
-    // const selectedDistrictValue = watch('district');
-
-    // useEffect(() => {
-    //     if (selectedDivisionValue) {
-    //         const selectedDivisionObj = allDivision.find(div => div.name === selectedDivisionValue);
-    //         if (selectedDivisionObj) {
-    //             setAllDistricts(selectedDivisionObj.districts);
-    //         }
-    //     }
-    // }, [selectedDivisionValue, allDivision]);
-
-    // useEffect(() => {
-    //     if (selectedDistrictValue) {
-    //         const selectedDistrictsObj = allUpazilas.find(upazila => upazila.district === selectedDistrictValue);
-    //         if (selectedDistrictsObj) {
-    //             setExpectedUpazilas(selectedDistrictsObj.upazilas);
-    //         }
-    //     }
-    // }, [selectedDistrictValue, allUpazilas]);
 
     return (
         <div>

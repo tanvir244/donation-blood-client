@@ -5,18 +5,18 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const CreateRequest = () => {
-    const { user } = useAuth();
+    // // const { user } = useAuth();
 
-    // showing Districts
-    const [allDivision, setAllDivision] = useState([]);
-    const [selectedDivision, setSelectedDivision] = useState("Dhaka");
-    const [allDistricts, setAllDistricts] = useState([]);
-    // showing Upazilas
-    const [allUpazilas, setAllUpazilas] = useState([]);
-    const [selectedDistrict, setSelectedDistrict] = useState([]);
-    const [expectedUpazilas, setExpectedUpazilas] = useState([]);
+    // // showing Districts
+    // const [allDivision, setAllDivision] = useState([]);
+    // const [selectedDivision, setSelectedDivision] = useState("Dhaka");
+    // const [allDistricts, setAllDistricts] = useState([]);
+    // // showing Upazilas
+    // const [allUpazilas, setAllUpazilas] = useState([]);
+    // const [selectedDistrict, setSelectedDistrict] = useState([]);
+    // const [expectedUpazilas, setExpectedUpazilas] = useState([]);
 
-    //  sign up form 
+    // //  sign up form 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
 
@@ -39,47 +39,149 @@ const CreateRequest = () => {
         }
     }
 
-    // showing Districts based on Division
+    // // showing Districts based on Division
+    // useEffect(() => {
+    //     fetch('/DivisionToDistrict.json')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setAllDivision(data[0].divisions);
+    //         });
+    // }, []);
+
+    // useEffect(() => {
+    //     const selectedDivisionObj = allDivision.find(div => div.name === selectedDivision);
+    //     if (selectedDivisionObj) {
+    //         setAllDistricts(selectedDivisionObj.districts);
+    //     }
+    // }, [selectedDivision, allDivision]);
+
+
+    // const handleDivisionChange = (event) => {
+    //     setSelectedDivision(event.target.value);
+    // };
+
+    // // showing Upazilas based on dristic
+    // useEffect(() => {
+    //     fetch('/DistrictsToUpazila.json')
+    //         .then(res => res.json())
+    //         .then(data => setAllUpazilas(data))
+    // }, [])
+
+    // const handleDistrictChange = (event) => {
+    //     setSelectedDistrict(event.target.value);
+    // };
+
+    // useEffect(() => {
+    //     const selectedDistrictsObj = allUpazilas.find(upazila => upazila.district === selectedDistrict);
+    //     if (selectedDistrictsObj) {
+    //         setExpectedUpazilas(selectedDistrictsObj.upazilas);
+    //     }
+
+    // }, [allUpazilas, selectedDistrict])
+
+    // ===========================================
+    const { user } = useAuth();
+    const [userData, setUserData] = useState({});
+    const { profile, name, email, division, district, upazila, blood } = userData;
+
+    // showing division
+    const [divisions, setDivisions] = useState([]);
+
+    // default division
+    const [defaultDivi, setDefaultDevi] = useState("Chattogram");
+
+    // divitions with districts
+    const [diviWithDistri, setDiviWithDistri] = useState([]);
+
+    // district with upazila
+    const [distWithUpazila, setDistiWithUpazila] = useState([]);
+
+    // default district
+    const [defaultDistri, setDefaultDistri] = useState("Bandarban");
+
+    // default upazila
+    const [defaultUpazila, setDefaultUpazila] = useState("Thanchi");
+
+    // // react hook form
+    // const { register, handleSubmit, formState: { errors } } = useForm();
+    // const onSubmit = async (data) => {
+    //     console.log(data);
+
+    //     const updateProfile = await axiosSecure.put(`/update_my_profile/${user.email}`, data)
+    //     if (updateProfile.data.modifiedCount > 0) {
+    //         console.log(updateProfile.data);
+    //         Swal.fire({
+    //             position: "center",
+    //             icon: "success",
+    //             title: "Your profile successfully updated",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         });
+    //         setEditable(false)
+    //     }
+    // }
+
+    // fetching division names
     useEffect(() => {
         fetch('/DivisionToDistrict.json')
             .then(res => res.json())
             .then(data => {
-                setAllDivision(data[0].divisions);
-            });
-    }, []);
+                // console.log(data[0].divisions);
+                // all divisions name only
+                const allDivisions = data[0].divisions;
+                const findDivisions = allDivisions.map(division => division.name);
+                setDivisions(findDivisions);
 
-    useEffect(() => {
-        const selectedDivisionObj = allDivision.find(div => div.name === selectedDivision);
-        if (selectedDivisionObj) {
-            setAllDistricts(selectedDivisionObj.districts);
-        }
-    }, [selectedDivision, allDivision]);
+                // divisions name and districts name in an object
+                const divisionsObject = data[0].divisions;
+                const expectedObject = divisionsObject.find(object => object.name === defaultDivi);
+                setDiviWithDistri(expectedObject.districts);
+            })
+    }, [defaultDivi])
 
-
-    const handleDivisionChange = (event) => {
-        setSelectedDivision(event.target.value);
-    };
-
-    // showing Upazilas based on dristic
+    // fetching district names
     useEffect(() => {
         fetch('/DistrictsToUpazila.json')
             .then(res => res.json())
-            .then(data => setAllUpazilas(data))
-    }, [])
+            .then(data => {
+                const findDistricts = data.find(district => district.district === defaultDistri);
+                setDistiWithUpazila(findDistricts.upazilas);
+            })
+    }, [defaultDistri])
+    console.log(distWithUpazila);
 
-    const handleDistrictChange = (event) => {
-        setSelectedDistrict(event.target.value);
-    };
+    // fetching user data
+    // useEffect(() => {
+    //     axiosSecure(`/user_data/${user.email}`)
+    //         .then(res => {
+    //             setDefaultDevi(res.data.division);
+    //             setDefaultDistri(res.data.district);
+    //             setDefaultUpazila(res.data.upazila);
+    //             setUserData(res.data);
 
-    useEffect(() => {
-        const selectedDistrictsObj = allUpazilas.find(upazila => upazila.district === selectedDistrict);
-        if (selectedDistrictsObj) {
-            setExpectedUpazilas(selectedDistrictsObj.upazilas);
-        }
+    //         })
+    // }, [axiosSecure, user.email]);
 
-    }, [allUpazilas, selectedDistrict])
 
-    // console.log(allDivision);
+    // change division 
+    const changeDivision = (event) => {
+        setDefaultDevi(event.target.value);
+        console.log(event.target.value);
+    }
+
+    // change district
+    const changeDistrict = (event) => {
+        setDefaultDistri(event.target.value);
+        console.log(event.target.value);
+    }
+
+    // change upazila
+    const changeUpazila = (event) => {
+        setDefaultUpazila(event.target.value);
+        console.log(event.target.value);
+    }
+
+
 
     return (
         <div className="mx-auto my-12">
@@ -112,14 +214,14 @@ const CreateRequest = () => {
                             <label className="mb-2 font-bold text-base text-black" htmlFor="division">Division</label>
                             <select
                                 {...register('division', { required: true })}
-                                value={selectedDivision}
-                                onChange={handleDivisionChange}
+                                onChange={changeDivision}
+                                value={defaultDivi}
                                 id="division"
                                 className="p-2 rounded-lg"
                             >
-                                {allDivision.map((item, index) => (
-                                    <option key={index} value={item.name}>{item.name}</option>
-                                ))}
+                                {
+                                    divisions.map((division, index) => <option key={index}>{division}</option>)
+                                }
                             </select>
                             {errors.division && <span className="text-red-600">Division is required</span>}
                         </div>
@@ -127,39 +229,36 @@ const CreateRequest = () => {
                             <label className="mb-2 font-bold text-base text-black" htmlFor="district">District</label>
                             <select
                                 {...register('district', { required: true })}
-                                onChange={handleDistrictChange}
+                                onChange={changeDistrict}
+                                value={defaultDistri}
                                 id="district"
                                 className="p-2 rounded-lg">
-                                <option value="" disabled>Select district</option>
-                                {allDistricts.map((district, index) => (
-                                    <option key={index} value={district}>{district}</option>
-                                ))}
+                                {diviWithDistri.map((district, index) => <option key={index}>{district}</option>)}
                             </select>
                             {errors.district && <span className="text-red-600">District is required</span>}
                         </div>
                     </div>
                     <div className="flex flex-col md:flex-row justify-between gap-4">
                         <div className="form-control w-full md:w-1/2">
-                            <label className="mb-2 font-bold text-base text-black" htmlFor="upazila">Upazila</label>
+                            <label className="mb-2 font-bold text-base text-black" htmlFor="district">Upazila</label>
                             <select
-
                                 {...register('upazila', { required: true })}
+                                onChange={changeUpazila}
+                                value={defaultUpazila}
                                 id="upazila"
                                 className="p-2 rounded-lg">
-                                <option value="" disabled>Select district than upazila</option>
-                                {expectedUpazilas.map((upazila, index) => (
-                                    <option key={index} value={upazila}>{upazila}</option>
-                                ))}
+                                {distWithUpazila.map((upazila, index) => <option key={index}>{upazila}</option>)}
                             </select>
                             {errors.upazila && <span className="text-red-600">Upazila is required</span>}
                         </div>
                         <div className="form-control w-full md:w-1/2">
-                            <label className="mb-2 font-bold text-base text-black" htmlFor="district">Blood Group</label>
+                            <label className="mb-2 font-bold text-base text-black" htmlFor="blood">Blood Group</label>
                             <select
                                 {...register('blood', { required: true })}
                                 id="blood"
-                                className="p-2 rounded-lg">
-                                <option value="" disabled>select blood group</option>
+                                className="p-2 rounded-lg"
+                            >
+                                <option value="" disabled>Select blood group</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>
