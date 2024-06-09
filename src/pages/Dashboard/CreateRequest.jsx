@@ -5,16 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const CreateRequest = () => {
-    // // const { user } = useAuth();
-
-    // // showing Districts
-    // const [allDivision, setAllDivision] = useState([]);
-    // const [selectedDivision, setSelectedDivision] = useState("Dhaka");
-    // const [allDistricts, setAllDistricts] = useState([]);
-    // // showing Upazilas
-    // const [allUpazilas, setAllUpazilas] = useState([]);
-    // const [selectedDistrict, setSelectedDistrict] = useState([]);
-    // const [expectedUpazilas, setExpectedUpazilas] = useState([]);
+    const { user } = useAuth();
 
     // //  sign up form 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -39,50 +30,7 @@ const CreateRequest = () => {
         }
     }
 
-    // // showing Districts based on Division
-    // useEffect(() => {
-    //     fetch('/DivisionToDistrict.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setAllDivision(data[0].divisions);
-    //         });
-    // }, []);
-
-    // useEffect(() => {
-    //     const selectedDivisionObj = allDivision.find(div => div.name === selectedDivision);
-    //     if (selectedDivisionObj) {
-    //         setAllDistricts(selectedDivisionObj.districts);
-    //     }
-    // }, [selectedDivision, allDivision]);
-
-
-    // const handleDivisionChange = (event) => {
-    //     setSelectedDivision(event.target.value);
-    // };
-
-    // // showing Upazilas based on dristic
-    // useEffect(() => {
-    //     fetch('/DistrictsToUpazila.json')
-    //         .then(res => res.json())
-    //         .then(data => setAllUpazilas(data))
-    // }, [])
-
-    // const handleDistrictChange = (event) => {
-    //     setSelectedDistrict(event.target.value);
-    // };
-
-    // useEffect(() => {
-    //     const selectedDistrictsObj = allUpazilas.find(upazila => upazila.district === selectedDistrict);
-    //     if (selectedDistrictsObj) {
-    //         setExpectedUpazilas(selectedDistrictsObj.upazilas);
-    //     }
-
-    // }, [allUpazilas, selectedDistrict])
-
     // ===========================================
-    const { user } = useAuth();
-    const [userData, setUserData] = useState({});
-    const { profile, name, email, division, district, upazila, blood } = userData;
 
     // showing division
     const [divisions, setDivisions] = useState([]);
@@ -101,25 +49,6 @@ const CreateRequest = () => {
 
     // default upazila
     const [defaultUpazila, setDefaultUpazila] = useState("Thanchi");
-
-    // // react hook form
-    // const { register, handleSubmit, formState: { errors } } = useForm();
-    // const onSubmit = async (data) => {
-    //     console.log(data);
-
-    //     const updateProfile = await axiosSecure.put(`/update_my_profile/${user.email}`, data)
-    //     if (updateProfile.data.modifiedCount > 0) {
-    //         console.log(updateProfile.data);
-    //         Swal.fire({
-    //             position: "center",
-    //             icon: "success",
-    //             title: "Your profile successfully updated",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //         setEditable(false)
-    //     }
-    // }
 
     // fetching division names
     useEffect(() => {
@@ -149,19 +78,6 @@ const CreateRequest = () => {
             })
     }, [defaultDistri])
     console.log(distWithUpazila);
-
-    // fetching user data
-    // useEffect(() => {
-    //     axiosSecure(`/user_data/${user.email}`)
-    //         .then(res => {
-    //             setDefaultDevi(res.data.division);
-    //             setDefaultDistri(res.data.district);
-    //             setDefaultUpazila(res.data.upazila);
-    //             setUserData(res.data);
-
-    //         })
-    // }, [axiosSecure, user.email]);
-
 
     // change division 
     const changeDivision = (event) => {
