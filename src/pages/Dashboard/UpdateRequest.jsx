@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
-const CreateRequest = () => {
+const UpdateRequest = () => {
     const { user } = useAuth();
+    const requestData = useLoaderData();
+    console.log(requestData.data);
+    const {blood, district, division, donation_date, donation_status, donation_time, full_address, hospital_name, recipient_name, request_message, requester_email, requester_name, upazila, _id} = requestData.data;
+    const navigate = useNavigate();
 
     // //  sign up form 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,16 +22,18 @@ const CreateRequest = () => {
         console.log(data);
 
         // send data to backend
-        const createRequest = await axiosSecure.post('/create_all_requests', data);
-        console.log(createRequest.data);
-        if(createRequest.data.insertedId){
+        const updateRequest = await axiosSecure.put(`/update_request/${_id}`, data);
+        console.log(updateRequest.data);
+        if(updateRequest.data.modifiedCount > 0){
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Request Successfully Done",
+                title: "Your request Successfully Updated",
                 showConfirmButton: false,
                 timer: 1500
               });
+              // redirect to Request Details page
+              navigate(`/requests_details/${_id}`)
         }
     }
 
@@ -36,7 +43,7 @@ const CreateRequest = () => {
     const [divisions, setDivisions] = useState([]);
 
     // default division
-    const [defaultDivi, setDefaultDevi] = useState("Chattogram");
+    const [defaultDivi, setDefaultDevi] = useState(division);
 
     // divitions with districts
     const [diviWithDistri, setDiviWithDistri] = useState([]);
@@ -45,10 +52,13 @@ const CreateRequest = () => {
     const [distWithUpazila, setDistiWithUpazila] = useState([]);
 
     // default district
-    const [defaultDistri, setDefaultDistri] = useState("Bandarban");
+    const [defaultDistri, setDefaultDistri] = useState(district);
 
     // default upazila
-    const [defaultUpazila, setDefaultUpazila] = useState("Thanchi");
+    const [defaultUpazila, setDefaultUpazila] = useState(upazila);
+
+    // default blood group
+    const [defaultBlood, setDefaultBlood] = useState(blood);
 
     // fetching division names
     useEffect(() => {
@@ -77,7 +87,7 @@ const CreateRequest = () => {
                 setDistiWithUpazila(findDistricts.upazilas);
             })
     }, [defaultDistri])
-    console.log(distWithUpazila);
+    // console.log(distWithUpazila);
 
     // change division 
     const changeDivision = (event) => {
@@ -97,11 +107,15 @@ const CreateRequest = () => {
         console.log(event.target.value);
     }
 
-
+    // change blood group 
+    const changeBlood = (event) => {
+        setDefaultBlood(event.target.value);
+        console.log(event.target.value);
+    }
 
     return (
         <div className="mx-auto my-12">
-            <h2 className="mb-8 text-center text-4xl text-[#ff0000] font-bold font-poetsen">Create Donation Request</h2>
+            <h2 className="mb-8 text-center text-4xl text-[#ff0000] font-bold font-poetsen">Update Donation Request</h2>
             <div className="card shrink-0 w-[92%] lg:w-[70%] mx-auto shadow-2xl bg-[#ffd3cb]">
                 <form className="card-body space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -122,7 +136,7 @@ const CreateRequest = () => {
                         <label className="label">
                             <span className="label-text text-black font-bold text-base">Recipient Name</span>
                         </label>
-                        <input type="text" placeholder="Recipient name" className="input input-bordered" {...register('recipient_name', { required: true })} />
+                        <input type="text" placeholder="Recipient name" className="input input-bordered" {...register('recipient_name', { required: true })} defaultValue={recipient_name} />
                         {errors.recipient_name && <span className="text-red-600">Recipient is required</span>}
                     </div>
                     <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -171,6 +185,8 @@ const CreateRequest = () => {
                             <label className="mb-2 font-bold text-base text-black" htmlFor="blood">Blood Group</label>
                             <select
                                 {...register('blood', { required: true })}
+                                value={defaultBlood}
+                                onChange={changeBlood}
                                 id="blood"
                                 className="p-2 rounded-lg"
                             >
@@ -192,14 +208,14 @@ const CreateRequest = () => {
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Donation Date</span>
                             </label>
-                            <input type="date" className="px-4 py-2 rounded-lg" id="" {...register('donation_date', { required: true })} />
+                            <input type="date" className="px-4 py-2 rounded-lg" id="" {...register('donation_date', { required: true })} defaultValue={donation_date}/>
                             {errors.donation_date && <span className="text-red-600">Donation date is required</span>}
                         </div>
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Donation Time</span>
                             </label>
-                            <input className="p-2 rounded-md" type="time" id="appt" {...register('donation_time', { required: true })}></input>
+                            <input className="p-2 rounded-md" type="time" id="appt" {...register('donation_time', { required: true })} defaultValue={donation_time}></input>
                             {errors.donation_time && <span className="text-red-600">Donation time is required</span>}
                         </div>
                     </div>
@@ -207,25 +223,25 @@ const CreateRequest = () => {
                         <label className="label">
                             <span className="label-text text-black font-bold text-base">Hospital Name</span>
                         </label>
-                        <input type="text" placeholder="Hospital name" className="input input-bordered" {...register('hospital_name', { required: true })} />
+                        <input type="text" placeholder="Hospital name" className="input input-bordered" {...register('hospital_name', { required: true })} defaultValue={hospital_name}/>
                         {errors.hospital_name && <span className="text-red-600">Hospital name is required</span>}
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-black font-bold text-base">Full Address</span>
                         </label>
-                        <input type="text" placeholder="Full Address" className="input input-bordered" {...register('full_address', { required: true })} />
+                        <input type="text" placeholder="Full Address" className="input input-bordered" {...register('full_address', { required: true })} defaultValue={full_address}/>
                         {errors.full_address && <span className="text-red-600">Full address is required</span>}
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-black font-bold text-base">Request Message</span>
                         </label>
-                        <textarea {...register('request_message', { required: true })} id="" cols="30" rows="10" placeholder="Write a request message" className="p-4 rounded-lg"></textarea>
+                        <textarea {...register('request_message', { required: true })} id="" cols="30" rows="10" placeholder="Write a request message" className="p-4 rounded-lg" defaultValue={request_message}></textarea>
                         {errors.request_message && <span className="text-red-600">Request message is required</span>}
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn bg-white font-bold text-black text-base">Request Submition</button>
+                        <button className="btn bg-[#ffef00] font-bold text-black text-base">Update</button>
                     </div>
                 </form>
             </div>
@@ -233,4 +249,4 @@ const CreateRequest = () => {
     );
 };
 
-export default CreateRequest;
+export default UpdateRequest;

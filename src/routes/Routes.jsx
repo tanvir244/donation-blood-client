@@ -10,6 +10,8 @@ import RequestViewDetails from "../pages/RequestViewDetails/RequestViewDetails";
 import { axiosSecure } from "../hooks/useAxiosSecure";
 import Profile from "../pages/Dashboard/Profile";
 import DonorHomePage from "../pages/Dashboard/DonorHomePage";
+import UpdateRequest from "../pages/Dashboard/UpdateRequest";
+import MyDonationRequests from "../pages/Dashboard/MyDonationRequests";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +38,11 @@ const router = createBrowserRouter([
           path: '/requests_details/:id',
           element: <RequestViewDetails></RequestViewDetails>,
           loader: ({params}) => axiosSecure(`/requests_details/${params.id}`)
+        },
+        {
+          path: '/update_request/:id',
+          element: <UpdateRequest></UpdateRequest>,
+          loader: ({params}) => axiosSecure(`/requests_details/${params.id}`)
         }
       ]
     },
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/donor_home_page',
           element: <DonorHomePage></DonorHomePage>
+        },
+        {
+          path: '/dashboard/my_donation_requests',
+          element: <MyDonationRequests></MyDonationRequests>
         }
       ]
     }

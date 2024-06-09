@@ -79,7 +79,8 @@ const Profile = () => {
 
     // fetching user data
     useEffect(() => {
-        axiosSecure(`/user_data/${user.email}`)
+        if(user?.email){
+            axiosSecure(`/user_data/${user.email}`)
             .then(res => {
                 setDefaultDevi(res.data.division);
                 setDefaultDistri(res.data.district);
@@ -87,8 +88,9 @@ const Profile = () => {
                 setUserData(res.data);
 
             })
-    }, [axiosSecure, user.email]);
-
+        }
+    }, [axiosSecure, user?.email]);
+    console.log(userData);
 
     // change division 
     const changeDivision = (event) => {
@@ -124,14 +126,14 @@ const Profile = () => {
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Name</span>
                             </label>
-                            <input type="text" placeholder="Your name" className="input input-bordered" {...register('name', { required: true })} defaultValue={name} readOnly={!editable} />
+                            <input type="text" placeholder="Your name" className="input input-bordered" {...register('name', { required: true })} defaultValue={user?.displayName} readOnly={!editable} />
                             {errors.name && <span className="text-red-600">Name is required</span>}
                         </div>
                         <div className="form-control w-full md:w-1/2">
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" {...register('email', { required: true })} defaultValue={email} readOnly />
+                            <input type="email" placeholder="email" className="input input-bordered" {...register('email', { required: true })} defaultValue={user?.email} readOnly />
                             {errors.email && <span className="text-red-600">Email is required</span>}
                         </div>
                     </div>

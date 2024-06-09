@@ -21,7 +21,7 @@ const Dashboard = () => {
                             Profile</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/donor_home">
+                        <NavLink to="/dashboard/my_donation_requests">
                             <span className='text-2xl'><BiSolidDonateHeart /></span>
                             My Donation Requests</NavLink>
                     </li>

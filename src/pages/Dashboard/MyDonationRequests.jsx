@@ -1,15 +1,21 @@
-// import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 import useMyRequests from "../../hooks/useMyRequests";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
-const DonorHomePage = () => {
+const MyDonationRequests = () => {
     const { user } = useAuth();
     const [requests, refetch] = useMyRequests();
+    const [requestList, setRequestList] = useState(requests);
     const axiosSecure = useAxiosSecure();
+    const [sortingData, setSortingData] = useState([]);
     console.log(requests);
+
+    useEffect(() => {
+        setRequestList(requests);
+    }, [requests])
 
     // let's update donor status to done
     const changeStatusDone = id => {
@@ -80,9 +86,30 @@ const DonorHomePage = () => {
         });
     }
 
+    const sortStatus = (status) => {
+        if (status !== 'all') {
+            const filteredRequests = requests.filter(request => request.donation_status === status);
+            setRequestList(filteredRequests);
+        }
+        else {
+            setRequestList(requests);
+        }
+    };
+    console.log(requestList);
+
     return (
         <div className="my-12">
-            <h1 className="text-4xl text-green-700 font-bold text-center">Hello, {user?.displayName}! Welcome !</h1>
+            <h1 className="text-4xl text-green-700 font-bold text-center">My Donation Requests</h1>
+            <div className="dropdown dropdown-bottom dropdown-end w-[90%] flex justify-end">
+                <div tabIndex={0} role="button" className="btn m-1 text-white bg-[#ff0000]">Select Status</div>
+                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-[#ff0000] text-white font-semibold rounded-box w-52">
+                    <li onClick={() => sortStatus('all')}><a>All</a></li>
+                    <li onClick={() => sortStatus('pending')}><a>Pending</a></li>
+                    <li onClick={() => sortStatus('inprogress')}><a>Inprogress</a></li>
+                    <li onClick={() => sortStatus('done')}><a>Done</a></li>
+                    <li onClick={() => sortStatus('cancel')}><a>Canceled</a></li>
+                </ul>
+            </div>
             <div className="w-[90%] md:w-max-6xl mx-auto my-8">
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -104,7 +131,7 @@ const DonorHomePage = () => {
                         </thead>
                         <tbody>
                             {
-                                requests.slice(0, 3).map((request, index) => <tr
+                                requestList.map((request, index) => <tr
                                     key={index}
                                 >
                                     <th>{index + 1}</th>
@@ -158,15 +185,9 @@ const DonorHomePage = () => {
                         </tbody>
                     </table>
                 </div>
-                
-                <div className="text-center my-6">
-                        <Link to="/dashboard/my_donation_requests">
-                            <button className="btn bg-[#1fd224] text-white text-base px-12">View All My Requests</button>
-                        </Link>
-                    </div>
             </div>
         </div>
     );
 };
 
-export default DonorHomePage;
+export default MyDonationRequests;

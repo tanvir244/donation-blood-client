@@ -66,7 +66,7 @@ const Modal = ({ closeModal, id }) => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "The Donor Info already exist !"
+                text: "Already someone donated before !"
             });
         }
     }
@@ -80,7 +80,7 @@ const Modal = ({ closeModal, id }) => {
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text font-bold text-green-700">Donor Name {cart.length}</span>
+                                <span className="label-text font-bold text-green-700">Donor Name</span>
                             </label>
                             <input {...register('donor_name', { required: true })} type="text" value={user.displayName} className="input input-bordered" readOnly />
                         </div>
