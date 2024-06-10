@@ -2,7 +2,7 @@
 const Featured = () => {
     return (
         <div className="my-20">
-            <h2 className="text-5xl font-bold mb-12 text-center">Featured</h2>
+            <h2 className="text-5xl font-bold mb-12 text-center text-[#bf0603]">Featured</h2>
             <div className="w-[90%] mx:w-max-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 <div className="card bg-base-100 shadow-xl image-full">
                     <figure><img src="https://i.ibb.co/bskCPbW/blood-donation-69.jpg" alt="Shoes" /></figure>
