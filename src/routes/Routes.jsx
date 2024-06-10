@@ -18,6 +18,8 @@ import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest"
 import ContentManagement from "../pages/Dashboard/ContentManagement";
 import AddBlog from "../pages/Dashboard/AddBlog";
 import EditBlog from "../pages/Dashboard/EditBlog";
+import AllDonationRequestVolunteerRole from "../pages/Dashboard/AllDonationRequestVolunteerRole";
+import ContentManagementVolunteer from "../pages/Dashboard/ContentManagementVolunteer";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +97,14 @@ const router = createBrowserRouter([
           path: '/dashboard/edit_blog/:id',
           element: <EditBlog></EditBlog>,
           loader: ({params}) => axiosSecure(`/expected_blog/${params.id}`)
+        },
+        {
+          path: '/dashboard/all_donation_requests_volunteer_role',
+          element: <AllDonationRequestVolunteerRole></AllDonationRequestVolunteerRole>
+        },
+        {
+          path: '/dashboard/content_management_volunteer',
+          element: <ContentManagementVolunteer></ContentManagementVolunteer>
         }
       ]
     }

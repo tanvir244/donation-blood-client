@@ -1,66 +1,17 @@
 import { Link } from "react-router-dom";
 import useContentBlogs from "../../hooks/useContentBlogs";
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 
-const ContentManagement = () => {
-    const [contents, refetch] = useContentBlogs();
+const ContentManagementVolunteer = () => {
+    const [contents] = useContentBlogs();
     const [allContents, setAllContents] = useState(contents);
     const [allContentsTo, setAllContentsTo] = useState(contents);
-    const axiosSecure = useAxiosSecure();
     console.log(allContentsTo);
 
     useEffect(() => {
         setAllContents(contents);
         setAllContentsTo(contents);
     }, [contents])
-
-    const handlePublish = id => {
-        axiosSecure.patch(`/update_blog_status/${id}`)
-            .then(res => {
-                console.log(res.data);
-                // refetch data
-                refetch();
-            })
-    }
-
-    const handleUnpublish = id => {
-        axiosSecure.patch(`/update_blog_status_publish/${id}`)
-            .then(res => {
-                console.log(res.data);
-                // refetch data 
-                refetch();
-            })
-    }
-
-    const handleDelete = id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosSecure.delete(`/delete_blog/${id}`)
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "The blog successfully deleted",
-                                icon: "success"
-                            });
-                            // refetch
-                            refetch();
-                        }
-                    })
-            }
-        });
-    }
 
     const sortStatus = (status) => {
         // console.log(status);
@@ -79,7 +30,6 @@ const ContentManagement = () => {
 
     return (
         <div className="my-6">
-            {/* <h2 className="text-4xl font-bold text-[#ff0054] text-center">Content Management</h2> */}
             <div className="w-[90%] mx-auto mt-10 flex justify-end">
                 <Link to='/dashboard/add_blog'>
                     <button className="btn bg-[#ff0054] text-white px-12 ">Add Blog</button>
@@ -109,12 +59,10 @@ const ContentManagement = () => {
                                     <p>{content.detail_content.slice(0, 200)}</p> :
                                     <p>{content.detail_content}</p>}
                             </div> */}
-                            <div className="flex justify-end gap-2 mt-2">
-                                {content.status === 'draft' ? <button onClick={() => handlePublish(content._id)} className="btn bg-green-700 text-white">Publish</button> : content.status === 'published' ? <button onClick={() => handleUnpublish(content._id)} className="btn bg-[#0d1b2a] text-white">Unpublish</button> : ''}
+                            <div className="flex justify-end mt-2">
                                 <Link to={`/dashboard/edit_blog/${content._id}`}>
                                     <button className="btn bg-[#ffd60a] text-black">Edit Blog</button>
                                 </Link>
-                                <button onClick={() => handleDelete(content._id)} className="btn bg-[#d90429] text-white">Delete</button>
                             </div>
                         </div>
                     </div>))
@@ -124,4 +72,4 @@ const ContentManagement = () => {
     );
 };
 
-export default ContentManagement;
+export default ContentManagementVolunteer;
