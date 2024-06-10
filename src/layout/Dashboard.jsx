@@ -43,6 +43,11 @@ const Dashboard = () => {
                         <span className='text-xl'><FaUser></FaUser></span>
                             All Blood Donation Requests</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/content_management">
+                        <span className='text-xl'><FaUser></FaUser></span>
+                            Content Management</NavLink>
+                    </li>
                 </ul>) : role === 'donor' ? (<ul className="menu font-semibold">
                     <li>
                         <NavLink to="/dashboard/donor_home_page">
