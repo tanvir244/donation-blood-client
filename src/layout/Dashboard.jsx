@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { BiSolidDonateHeart } from 'react-icons/bi';
-import { FaHome, FaUser } from 'react-icons/fa';
-import { MdCreateNewFolder } from 'react-icons/md';
+import { BiSolidDonateBlood, BiSolidDonateHeart } from 'react-icons/bi';
+import { FaHome, FaUser, FaUsers } from 'react-icons/fa';
+import { MdCreateNewFolder, MdOutlineContentPasteSearch } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { axiosSecure } from '../hooks/useAxiosSecure';
@@ -35,17 +35,17 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <NavLink to="/dashboard/all_users">
-                            <span className='text-xl'><FaUser></FaUser></span>
+                            <span className='text-xl'><FaUsers /></span>
                             All Users</NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/all_blood_donation_requests">
-                            <span className='text-xl'><FaUser></FaUser></span>
+                            <span className='text-xl'><BiSolidDonateBlood /></span>
                             All Blood Donation Requests</NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/content_management">
-                            <span className='text-xl'><FaUser></FaUser></span>
+                            <span className='text-xl'><MdOutlineContentPasteSearch /></span>
                             Content Management</NavLink>
                     </li>
                 </ul>) : role === 'donor' ? (<ul className="menu font-semibold">
@@ -61,7 +61,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <NavLink to="/dashboard/my_donation_requests">
-                            <span className='text-2xl'><BiSolidDonateHeart /></span>
+                            <span className='text-2xl'><BiSolidDonateBlood /></span>
                             My Donation Requests</NavLink>
                     </li>
                     <li>
@@ -82,12 +82,12 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <NavLink to="/dashboard/all_donation_requests_volunteer_role">
-                            <span className='text-xl'><FaUser></FaUser></span>
+                            <span className='text-xl'><BiSolidDonateBlood /></span>
                             All Blood Donation Requests</NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/content_management_volunteer">
-                            <span className='text-xl'><FaUser></FaUser></span>
+                            <span className='text-xl'><MdOutlineContentPasteSearch /></span>
                             Content Management</NavLink>
                     </li>
                 </ul>) : <></>}
