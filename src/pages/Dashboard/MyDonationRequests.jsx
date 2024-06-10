@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
 import useMyRequests from "../../hooks/useMyRequests";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 
 const MyDonationRequests = () => {
-    const { user } = useAuth();
     const [requests, refetch] = useMyRequests();
     const [requestList, setRequestList] = useState(requests);
     const axiosSecure = useAxiosSecure();
