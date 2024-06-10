@@ -4,26 +4,39 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 // image key 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddBlog = () => {
+const EditBlog = () => {
+    const expectedData = useLoaderData();
     const axiosSecure = useAxiosSecure();
+    const { _id, title, photo, detail_content } = expectedData.data;    
+    console.log(expectedData.data);
     const navigate = useNavigate();
 
-    // ======
     const editor = useRef(null);
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(detail_content || '');
 
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+        defaultValues: {
+            title: title || '',
+            photo: photo || null,
+            detail_content: detail_content || ''
+        }
+    });
 
     useEffect(() => {
         // Register the detail_content field manually
         register('detail_content', { required: true });
     }, [register]);
+
+    useEffect(() => {
+        // Set the initial value of the editor content
+        setValue('detail_content', detail_content);
+    }, [detail_content, setValue]);
 
     const onSubmit = async (data) => {
         // Add the editor content to the form data
@@ -31,38 +44,42 @@ const AddBlog = () => {
         console.log(data.detail_content);
 
         // image upload to imgbb and then get an URL
-        const formData = new FormData();
-        formData.append('image', data.photo[0]);
-        const res = await axios.post(image_hosting_api, formData);
-        console.log(res.data);
-        console.log(res?.data?.data?.display_url);
+        if (data.photo[0]) {
+            const formData = new FormData();
+            formData.append('image', data.photo[0]);
+            const res = await axios.post(image_hosting_api, formData);
+            console.log(res.data);
+            console.log(res?.data?.data?.display_url);
 
+            // Update the photo URL in the form data
+            data.photo = res?.data?.data?.display_url;
+        } else {
+            data.photo = photo; // Keep the existing photo if no new photo is uploaded
+        }
 
-        // ======
-        data.photo = res?.data?.data?.display_url;
         data.status = 'draft';
         console.log(data);
 
-        axiosSecure.post('/all_blogs', data)
+        axiosSecure.put(`/update_blog/${_id}`, data)
         .then(res => {
             console.log(res.data);
-            if(res.data.insertedId){
+            if (res.data.modifiedCount > 0) {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "New post has been created successfully",
+                    title: "The post has been updated successfully",
                     showConfirmButton: false,
                     timer: 1500
-                  });
-                //   navigate 
+                });
+                // navigate
                 navigate('/dashboard/content_management');
             }
-        })
+        });
     };
 
     return (
         <div>
-            <h1 className="text-4xl font-bold text-black text-center mt-8 mb-6">Add Blog</h1>
+            <h1 className="text-4xl font-bold text-black text-center mt-8 mb-6">Edit Blog</h1>
             <div className="card shrink-0 w-full md:w-[60%] mx-auto shadow-2xl bg-[#2f4858]">
                 <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                     <div className="form-control">
@@ -107,4 +124,4 @@ const AddBlog = () => {
     );
 };
 
-export default AddBlog;
+export default EditBlog;

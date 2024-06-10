@@ -17,6 +17,7 @@ import AllUsers from "../pages/Dashboard/AllUsers";
 import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest";
 import ContentManagement from "../pages/Dashboard/ContentManagement";
 import AddBlog from "../pages/Dashboard/AddBlog";
+import EditBlog from "../pages/Dashboard/EditBlog";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +90,11 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/add_blog',
           element: <AddBlog></AddBlog>
+        },
+        {
+          path: '/dashboard/edit_blog/:id',
+          element: <EditBlog></EditBlog>,
+          loader: ({params}) => axiosSecure(`/expected_blog/${params.id}`)
         }
       ]
     }
