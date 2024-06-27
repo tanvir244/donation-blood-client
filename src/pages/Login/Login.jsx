@@ -4,12 +4,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { login } = useAuth();
     const [loginError, setLoginError] = useState([]);
     const [showPassword, setShowPassword] = useState(true);
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
@@ -31,12 +32,14 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 2000
                 })
-                    .then(() => {
-                        // reset form
-                        // form.reset();
-                        // Navigate after login
-                        // navigate(location?.state ? location.state : '/');
-                    })
+                navigate('/');
+                    // .then(() => {
+                    //     navigate('/');
+                    //     // reset form
+                    //     // form.reset();
+                    //     // Navigate after login
+                    //     // navigate(location?.state ? location.state : '/');
+                    // })
             })
             .catch(() => {
                 setLoginError('Your email or password incorrect, try again');
