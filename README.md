@@ -24,5 +24,18 @@ Admin is the most powerfull role. Admin Dashboard includes severel features such
 4. React-hook-form
 5. Swipper slider
 6. sweetalert2
-7. react-toastify 
+7. react-toastify
+
+## Check
+Role: Donor
+Email: mujahid@gmail.com
+Pass: Mujahid0
+
+Role: Volunteer
+Email: abdullah@gmail.com
+Pass: Abdullah0
+
+Role: Admin
+Email: tanvir@gmail.com
+Pass: Tanvir0
   
