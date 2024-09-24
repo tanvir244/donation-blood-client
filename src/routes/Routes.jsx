@@ -23,6 +23,7 @@ import ContentManagementVolunteer from "../pages/Dashboard/ContentManagementVolu
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import BlogDetails from "../pages/BlogDetails/BlogDetails";
 import { axiosPublic } from "../hooks/useAxiosPublic";
+import ProjectOverview from "../pages/ProjectOverview/ProjectOverview";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
         path: '/blog_details/:id',
         element: <BlogDetails></BlogDetails>,
         loader: ({ params }) => axiosPublic(`/expected_blog/${params.id}`)
+      },
+      {
+        path: '/project_overview',
+        element: <ProjectOverview />
       }
     ]
   },

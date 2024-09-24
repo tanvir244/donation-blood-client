@@ -111,29 +111,29 @@ const Profile = () => {
     }
 
     return (
-        <div>
-            <h2 className="text-center text-5xl text-[#ff0000] font-bold font-poetsen mt-12">Profile</h2>
-            <img src={profile} className="w-[170px] h-[170px] object-cover rounded-full mx-auto my-8" alt="" />
+        <div className="bg-[#dad7cd] py-12">
+            <h2 className="text-center text-5xl text-[#000814] font-bold font-poetsen">Edit Profile</h2>
+            <img src={profile} className="w-[170px] h-[170px] shadow-2xl border-4 border-white object-cover rounded-full mx-auto my-8" alt="" />
             {editable ? <></>
                 : <div className="flex justify-center">
-                    <button onClick={() => setEditable(true)} className="btn bg-[#ffea00] text-base font-bold">Edit Profile</button>
+                    <button onClick={() => setEditable(true)} className="btn bg-yellow-500 text-black text-base font-bold">Edit Profile</button>
                 </div>
             }
-            <div className="card shrink-0 w-[92%] lg:w-[70%] mt-4 mb-12 mx-auto shadow-2xl bg-[#ffd3cb]">
+            <div className={`card shrink-0 w-[92%] lg:w-[70%] mt-4 mb-12 mx-auto shadow-2xl ${editable ? "bg-[#b3a884]" : "bg-[#000814]"}`}>
                 <form className="card-body space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex flex-col md:flex-row justify-between gap-4">
                         <div className="form-control w-full md:w-1/2">
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Name</span>
                             </label>
-                            <input type="text" placeholder="Your name" className="input input-bordered" {...register('name', { required: true })} defaultValue={user?.displayName} readOnly={!editable} />
+                            <input type="text" placeholder="Your name" className="input input-bordered font-bold" {...register('name', { required: true })} defaultValue={user?.displayName} readOnly={!editable} />
                             {errors.name && <span className="text-red-600">Name is required</span>}
                         </div>
                         <div className="form-control w-full md:w-1/2">
                             <label className="label">
                                 <span className="label-text text-black font-bold text-base">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" {...register('email', { required: true })} defaultValue={user?.email} readOnly />
+                            <input type="email" placeholder="email" className="input input-bordered font-bold" {...register('email', { required: true })} defaultValue={user?.email} readOnly />
                             {errors.email && <span className="text-red-600">Email is required</span>}
                         </div>
                     </div>
@@ -145,7 +145,7 @@ const Profile = () => {
                                 onChange={editable ? changeDivision : undefined}
                                 value={defaultDivi}
                                 id="division"
-                                className="p-2 rounded-lg"
+                                className="p-2 rounded-lg font-bold"
                             >
                                 {
                                     divisions.map((division, index) => <option key={index}>{division}</option>)
@@ -160,7 +160,7 @@ const Profile = () => {
                                 onChange={editable ? changeDistrict : undefined}
                                 value={defaultDistri}
                                 id="district"
-                                className="p-2 rounded-lg">
+                                className="p-2 rounded-lg font-bold">
                                 {diviWithDistri.map((district, index) => <option key={index}>{district}</option>)}
                             </select>
                             {errors.district && <span className="text-red-600">District is required</span>}
@@ -174,7 +174,7 @@ const Profile = () => {
                                 onChange={editable ? changeUpazila : undefined}
                                 value={defaultUpazila}
                                 id="upazila"
-                                className="p-2 rounded-lg">
+                                className="p-2 rounded-lg font-bold">
                                 {distWithUpazila.map((upazila, index) => <option key={index}>{upazila}</option>)}
                             </select>
                             {errors.upazila && <span className="text-red-600">District is required</span>}
@@ -184,7 +184,7 @@ const Profile = () => {
                             <select
                                 {...register('blood', { required: true })}
                                 id="blood"
-                                className="p-2 rounded-lg"
+                                className="p-2 rounded-lg font-bold"
                                 disabled={!editable} // Conditionally disable the select
                             >
                                 <option value="" disabled>Select blood group</option>

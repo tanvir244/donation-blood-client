@@ -1,12 +1,12 @@
 // import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
+// import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useMyRequests from "../../hooks/useMyRequests";
 
 const DonorHomePage = () => {
-    const { user } = useAuth();
+    // const { user } = useAuth();
     const [requests, refetch] = useMyRequests();
     const axiosSecure = useAxiosSecure();
     console.log(requests);
@@ -81,9 +81,9 @@ const DonorHomePage = () => {
     }
 
     return (
-        <div className="my-12">
-            <h1 className="text-4xl text-green-700 font-bold text-center">Hello, {user?.displayName}! Welcome !</h1>
-            <div className="w-[90%] md:w-max-6xl mx-auto my-8">
+        <div className="bg-[#dad7cd] py-12 min-h-[100vh]">
+            <h1 className="text-4xl text-[#000814] font-bold text-center">My Donation Requests</h1>
+            <div className="w-[90%] md:w-max-6xl mx-auto my-8 shadow-xl bg-[#beb8a2] rounded-lg">
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -106,6 +106,7 @@ const DonorHomePage = () => {
                             {
                                 requests.slice(0, 3).map((request, index) => <tr
                                     key={index}
+                                    className="font-bold"
                                 >
                                     <th>{index + 1}</th>
                                     <td>{request.recipient_name}</td>
@@ -158,12 +159,11 @@ const DonorHomePage = () => {
                         </tbody>
                     </table>
                 </div>
-                
-                <div className="text-center my-6">
-                        <Link to="/dashboard/my_donation_requests">
-                            <button className="btn bg-[#1fd224] text-white text-base px-12">View All My Requests</button>
-                        </Link>
-                    </div>
+            </div>
+            <div className="text-center my-6">
+                <Link to="/dashboard/my_donation_requests">
+                    <button className="btn bg-[#1fd224] text-white text-lg px-12">View All My Requests</button>
+                </Link>
             </div>
         </div>
     );

@@ -96,8 +96,8 @@ const ContentManagement = () => {
             <div className="w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
                 {
                     allContents.map(content => (<div
-                        key={content._id} className="card card-compact bg-base-100 shadow-xl flex flex-col">
-                        <img className="w-full h-[220px] rounded-t-2xl object-cover" src={content.photo} alt="Shoes" />
+                        key={content._id} className={`card card-compact  shadow-xl flex flex-col ${content.status === 'draft' ? "bg-[#f29339]" : "bg-green-600"}`}>
+                        <img className={`w-full h-[220px] rounded-t-2xl object-cover`} src={content.photo} alt="Shoes" />
                         <div className="card-body">
                             <h2 className="card-title font-bold">{content.title}</h2>
                             {/* <div contentEditable='false' dangerouslySetInnerHTML={{ __html: content.detail_content }}></div> */}
@@ -111,10 +111,11 @@ const ContentManagement = () => {
                             </div> */}
                             <div className="flex justify-end gap-2 mt-2">
                                 {content.status === 'draft' ? <button onClick={() => handlePublish(content._id)} className="btn bg-green-700 text-white">Publish</button> : content.status === 'published' ? <button onClick={() => handleUnpublish(content._id)} className="btn bg-[#0d1b2a] text-white">Unpublish</button> : ''}
-                                <Link to={`/dashboard/edit_blog/${content._id}`}>
-                                    <button className="btn bg-[#ffd60a] text-black">Edit Blog</button>
-                                </Link>
-                                <button onClick={() => handleDelete(content._id)} className="btn bg-[#d90429] text-white">Delete</button>
+                                <button className={`btn bg-[#ffd60a] text-black ${content.status === 'draft' ? "opacity-50 cursor-not-allowed" : ""}`}
+                                        disabled={content.status === 'draft'}><Link to={`/dashboard/edit_blog/${content._id}`}>Edit Blog</Link></button>
+                                <button onClick={() => handleDelete(content._id)}
+                                    className={`btn bg-[#d90429] text-white ${content.status === 'draft' ? "opacity-50 cursor-not-allowed" : ""}`}
+                                    disabled={content.status === 'draft'}>Delete</button>
                             </div>
                         </div>
                     </div>))

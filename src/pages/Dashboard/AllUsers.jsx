@@ -54,10 +54,10 @@ const AllUsers = () => {
     }
 
     return (
-        <div className="my-12">
-            <h1 className="text-4xl text-green-700 font-bold text-center">All Users</h1>
-            <div className="w-[90%] md:w-max-6xl mx-auto my-8">
-                <div className="overflow-x-auto">
+        <div className="py-12 bg-[#dad7cd] min-h-[100vh]">
+            <h1 className="text-4xl text-[#000814] font-bold text-center font-poetsen">Manage All Users</h1>
+            <div className="w-[90%] md:w-max-6xl mx-auto my-8 shadow-xl bg-[#beb8a2] rounded-lg">
+                <div className="overflow-x-auto border border-white rounded-lg">
                     <table className="table">
                         {/* head */}
                         <thead>
@@ -78,6 +78,7 @@ const AllUsers = () => {
                             {
                                 allUsersData.map((request, index) => <tr
                                     key={index}
+                                    className="font-bold"
                                 >
                                     <th>{index + 1}</th>
                                     <td>
@@ -89,9 +90,9 @@ const AllUsers = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="w-24">{request.name}</td>
+                                    <td>{request.name}</td>
                                     <td>{request.email}</td>
-                                    <td className="font-semibold text-black">{request.status}</td>
+                                    <td>{request.status}</td>
                                     <td>
                                         <button onClick={() => handleActive(request._id)} className="btn btn-sm bg-green-600 text-white" disabled={request.status === 'active'}>Unblock</button>
                                     </td>

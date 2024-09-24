@@ -68,8 +68,8 @@ const AllDonationRequestVolunteerRole = () => {
     console.log(requestList);
 
     return (
-        <div className="my-12">
-            <h1 className="text-4xl text-green-700 font-bold text-center">My Donation Requests</h1>
+        <div className="bg-[#dad7cd] py-12">
+            <h1 className="text-4xl text-[#000814] font-bold text-center">All Donation Requests</h1>
             <div className="dropdown dropdown-bottom dropdown-end w-[90%] flex justify-end">
                 <div tabIndex={0} role="button" className="btn m-1 text-white bg-[#ff0000]">Select Status</div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-[#ff0000] text-white font-semibold rounded-box w-52">
@@ -80,7 +80,7 @@ const AllDonationRequestVolunteerRole = () => {
                     <li onClick={() => sortStatus('cancel')}><a>Canceled</a></li>
                 </ul>
             </div>
-            <div className="w-[90%] md:w-max-6xl mx-auto my-8">
+            <div className="w-[90%] md:w-max-6xl mx-auto my-8 shadow-xl bg-[#beb8a2] rounded-lg">
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -101,6 +101,7 @@ const AllDonationRequestVolunteerRole = () => {
                             {
                                 requestList.map((request, index) => <tr
                                     key={index}
+                                    className="font-bold"
                                 >
                                     <th>{index + 1}</th>
                                     <td>{request.recipient_name}</td>

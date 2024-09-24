@@ -22,7 +22,7 @@ const AllBlogs = () => {
                 <div className="w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
                     {
                         allContents.map(content => (<div
-                            key={content._id} className="card card-compact bg-base-100 shadow-xl flex flex-col">
+                            key={content._id} className="card card-compact bg-[#ffddd2] shadow-xl flex flex-col">
                             <img className="w-full h-[220px] rounded-t-2xl object-cover" src={content.photo} alt="Shoes" />
                             <div className="card-body">
                                 <h2 className="card-title font-bold text-black">{content.title}</h2>

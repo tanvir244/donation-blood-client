@@ -11,7 +11,7 @@ const BlogDetails = () => {
             <Navbar></Navbar>
             <div className="my-6">
                 <div className="w-[90%] max-w-6xl mx-auto">
-                    <div className="bg-[#ced4da] mt-8 mb-20 p-6 md:p-8 rounded-lg">
+                    <div className="bg-[#ffddd2] mt-8 mb-20 p-6 md:p-8 rounded-lg">
                         <div className="mb-8">
                             {/* <div contentEditable='false' dangerouslySetInnerHTML={{ __html: 'hello' }}></div> */}
                             <h2 className=" md:w-[70%] lg:w-[60%] text-4xl font-bold mb-4">
@@ -19,7 +19,7 @@ const BlogDetails = () => {
                             </h2>
                             <span className="bg-green-700 text-white p-2 rounded-lg text-sm">{status}</span>
                         </div>
-                        <img className="w-full h-[380px] md:h-[580px] object-cover" src={photo} alt="" />
+                        <img className="w-full h-[380px] md:h-[580px] object-cover rounded-xl" src={photo} alt="" />
                         <div className="space-y-4 mt-8">
                             <p>
                                 <div contentEditable='false' dangerouslySetInnerHTML={{ __html: detail_content }}></div>

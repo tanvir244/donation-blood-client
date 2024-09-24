@@ -16,7 +16,7 @@ const PendingDonationRequests = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="w-[90%] md:w-max-6xl mx-auto my-8">
+            <div className="w-[90%] md:w-max-6xl mx-auto my-8 bg-[#dad7cd] rounded-lg">
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -37,6 +37,7 @@ const PendingDonationRequests = () => {
                             {
                                 donationRequests.map((request, index) => <tr
                                     key={index}
+                                    className="font-semibold"
                                 >
                                     <th>{index + 1}</th>
                                     <td>{request.recipient_name}</td>
@@ -46,7 +47,7 @@ const PendingDonationRequests = () => {
                                     <td>{request.donation_date}</td>
                                     <td>{request.donation_time}</td>
                                     <td><span className="bg-[#F8C3B9] text-red-700 py-2 px-4 rounded-2xl font-bold">{request.donation_status}</span></td>
-                                    <td><Link to={`/requests_details/${request._id}`}><button className="btn bg-green-600 text-white">View Details</button></Link></td>
+                                    <td><Link to={`/requests_details/${request._id}`}><button className="btn bg-[#006d77] text-white">View Details</button></Link></td>
                                 </tr>)
                             }
                         </tbody>
